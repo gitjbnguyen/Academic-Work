@@ -1,0 +1,45 @@
+--DELETE FROM employees 
+--WHERE employee_id = 100
+--master
+CREATE OR ALTER PROCEDURE deletedemp(@empid int)
+AS
+BEGIN TRY
+delete from employees 
+Where employee_ID = @empid
+print'employee number ' + Convert(varchar(10), @empid) + ' has been deleted'
+END TRY 
+BEGIN CATCH
+--put your catch statement here
+print'cannot delete specified employee'
+print 'error line: ' + Convert(varchar(10),error_line()) + CHAR(13)+CHAR(10)
+print 'error message: ' + error_message() + CHAR(13)+CHAR(10)
+execute altering @empid
+execute depend @empid
+delete from employees
+where employee_id = @empid
+print'employee number ' + Convert(varchar(10), @empid) + ' has been deleted'
+END CATCH
+execute deletedemp 204
+go
+CREATE OR ALTER PROCEDURE altering(@manager int)
+AS 
+BEGIN TRY 
+update employees
+set manager_id = null
+where manager_id = @manager
+print 'rows nullified'
+end try
+begin catch
+print 'error line' + Convert(varchar(10),error_line()) + CHAR(13)+CHAR(10)
+print 'error message' + error_message() + CHAR(13)+CHAR(10)
+end catch
+go
+CREATE OR ALTER PROCEDURE depend(@empid int)
+AS 
+BEGIN  
+delete from dependents
+where employee_id = @empid
+print 'dependent(s) of employee ID ' + Convert(varchar(10), @empid) + ' has been
+deleted'
+END
+select * from employees
