@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        #div1 {
+            width: 300px;
+            height: 300px;
+            border: 2px solid red;
+            background-color: blue;
+            margin: 10px;
+        }
+
+        #div2 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid cyan;
+            background-color: magenta;
+            margin: 10px;
+        }
+
+        #div3 {
+            width: 100px;
+            height: 100px;
+            border: 2px solid green;
+            background-color: yellow;
+            margin: 10px;
+        }
+
+        #div4 {
+            width: 50px;
+            height: 50px;
+            border: 2px solid magenta;
+            background-color: red;
+            margin: 10px;
+        }
+        .plusIcon:before {
+            content: "\2b";
+            font-size: 70px;
+            background-color: red;
+        }
+
+        .minusIcon:before {
+            content: "\2212";
+            font-size: 70px;
+            background-color: blue;
+        }
+
+        li {
+
+            padding: 5px;
+            text-align: center;
+            border: 1px solid darkgreen;
+            background-color: #ceee7e;
+            color: darkred;
+        }
+
+        .listedItems {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!--lab assignment
+        have a div1 inside div2 inside div3 inside div4
+        all with a set of dimensions, border, and background color
+        at a click of a button cause all to fadeout at different speeds
+        the inner ones first
+        use a radio button to allow user to choose either the fade or the hide/show
+
+        have an + icon to click on
+        once it is clicked on a list of 4 items drop downs and the icon can become a - icon
+        click on the - icon and the list goes back up and the - icon changes to the + icon
+        -->
+    <!--divs -->
+
+    <div>
+        <div id="div1">
+            div1
+            <div id="div2">
+                div2
+                <div id="div3">
+                    div3
+                    <div id="div4">
+                        div4
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--buttons-->
+    <button id="btnFadeOut">FadeOut All Divs</button>
+    <br />
+    <label><input type="radio" id="rbFadeIn" name="btnradio" value="fadeIn" /> fadeIn</label> <br />
+    <label><input type="radio" id="rbShowHide" name="btnradio" value="toggle" /> show/hide (toggle)</label> <br />
+
+    <!--<div id="panel"> (Click to slide up and down panel)</div>-->
+    <div id="miniList"> 
+        <div id="pSign"></div>
+        <ul class="listedItems">
+        <li>Python</li>
+        <li>Java</li>
+        <li>C#</li>
+        <li>C++</li>
+        </ul>
+        
+     </div>
+    <script>
+        $("#btnFadeOut").click(function () {
+            $("#div1").fadeOut(6000);
+            $("#div2").fadeOut(4000);
+            $("#div3").fadeOut(3000);
+            $("#div4").fadeOut(2000);
+        });
+
+        //$("rbFadeIn").click(function () {
+
+        //    $("#div1").fadeIn(6000);
+        //    $("#div2").fadeIn(4000);
+        //    $("#div3").fadeIn(3000);
+        //    $("#div4").fadeIn(2000);
+
+
+        //});
+
+        //$(document).ready(function () {
+        //    $("#rbFadeIn", "#rbShowHide").change(function () {
+        //        if ($("#rbFadeIn").is(":checked")) {
+        //                 $("#div1").fadeIn(6000);
+        //                 $("#div2").fadeIn(4000);
+        //                 $("#div3").fadeIn(3000);
+        //                 $("#div4").fadeIn(2000);
+        //        }
+        //        else if($("#rbShowHide").is(":checked")) {
+        //                       $("#div1").toggle(6000);
+        //                       $("#div2").toggle(4000);
+        //                       $("#div3").toggle(3000);
+        //                       $("#div4").toggle(2000);
+        //        }
+        //    });
+        //});
+
+        $('input:radio[name="btnradio"]').change(
+            function () {
+                if ($(this).is(':checked') && $(this).val() == 'fadeIn') {
+                    $("#div1").fadeIn(6000);
+                    $("#div2").fadeIn(4000);
+                    $("#div3").fadeIn(3000);
+                    $("#div4").fadeIn(2000);
+
+
+                } else {
+                    $("#div1").toggle(6000);
+                    $("#div2").toggle(4000);
+                    $("#div3").toggle(3000);
+                    $("#div4").toggle(2000);
+                }
+            });
+
+
+
+        $("#pSign").addClass("plusIcon");
+
+
+        $("#pSign").click(function () {
+            $(".listedItems").slideToggle(1000);
+
+            $("#pSign").toggleClass("minusIcon", "plusIcon");
+
+        });
+            //$("rbShowHide").change(function () {
+            //    $("#div1").toggle(6000);
+            //    $("#div2").toggle(4000);
+            //    $("#div3").toggle(3000);
+            //    $("#div4").toggle(2000);
+
+
+            //});
+
+
+
+    </script>
+</body>
+</html>

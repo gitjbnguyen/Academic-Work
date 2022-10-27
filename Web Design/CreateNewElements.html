@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        #div1 {
+            width: 40%;
+            height: 300px;
+            border: 2px solid blue;
+            background-color: darkgreen;
+            overflow:scroll;
+            color:white;
+        }
+
+        p {
+            background-color: lightgreen;
+            color: darkgreen;
+            font-size: larger;
+            border: 1px solid gold;
+            padding: 5px;
+            margin: 5px;
+        }
+        li {
+            color: white;
+            font-size: 18px;
+            
+        }
+        table,th,td{
+            color:white;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <h4>Create new html element in javascript</h4>
+    <p>
+        We can create a new html element in javascript and add it to the current web 
+        page. <br/>
+        use the <code>var element = document.createElement("p")</code> to create a new page element.
+        you can replace p by any other element. <br/>
+        use the <code>parent.appendChild(element)</code> to add the element to 
+        the web page in a parent container.
+
+    </p>
+
+    <!--============================================================================================-->
+    <button id="btnCreateElement">Create a p tag element inside a div parent</button>
+    &nbsp;&nbsp;
+    <button id="btnCreateList">Create a list with 3 items</button>
+    &nbsp;&nbsp;
+    <button id="btnCreateStyle">Create a style</button>
+    <br/><br/>
+    <button id="btnCreateTable">Create a 2x3 table</button>
+    <br/><br/>
+    <div id="div1">
+
+    </div>
+
+    <script>
+        var counter = 0;
+        $("#btnCreateElement").click(function () {
+            //this is a child
+            var paragraph = document.createElement("p");
+
+            //create a text node that goes with the p element
+            counter++;
+            var text = document.createTextNode("This is a paragraph " + counter);
+            //add the text to this paragraph element 
+            paragraph.appendChild(text);
+
+            //add the new p element to div1
+            //first get a reference to div1
+            //use appendChild to add paragraph to div1
+            var parent = document.getElementById("div1");
+            parent.appendChild(paragraph);
+        });
+        //-------------------------------------------------------
+        var counter2 = 0;
+        //create a new list with 3 items, which goes into div1
+        $("#btnCreateList").click(function () {
+            //create a list ul or ol
+            //create a list item
+            //create a text for the item
+            //append text to the list items=
+            //append list item to the list
+
+            var list = document.createElement("ul");
+            for (var i = 1; i <= 3; i++) {
+                var listItem = document.createElement("li");
+                counter2++;
+                var textItem = document.createTextNode("list item " + counter2);
+                listItem.appendChild(textItem);
+
+                list.appendChild(listItem);
+            }
+            var parent = document.getElementById("div1");
+            parent.appendChild(list);
+        });
+        $("#btnCreateTable").click(function () {
+            var table = document.createElement("table");
+            for (var i = 1; i < 3; i++) {
+                //creation of elements
+                var tableRows = document.createElement("tr");
+                var tableData1 = document.createElement("td");
+                var tableData2 = document.createElement("td");
+                var tableData3 = document.createElement("td");
+                //creation of nodes
+                var text1 = document.createTextNode("I like chocolates.");
+                var text2 = document.createTextNode("I like strawberries.");
+                var text3 = document.createTextNode("I like juice.");
+                //appending
+                tableData1.appendChild(text1);
+                tableData2.appendChild(text2);
+                tableData3.appendChild(text3);
+                tableRows.appendChild(tableData1);
+                tableRows.appendChild(tableData2);
+                tableRows.appendChild(tableData3);
+                
+                table.appendChild(tableRows);
+
+            }
+            //this attaches the table to the document's body
+            //document.body.appendChild(table);
+            var parent = document.getElementById("div1");
+            parent.appendChild(table);
+        });
+    </script>
+</body>
+</html>
+<!--
+Exercise
+    in javascript, create a table of 2 rows and 3 columns
+    with some text in each cell
+
+-->

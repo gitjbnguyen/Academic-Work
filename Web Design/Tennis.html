@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        #mycanvas {
+            border: 2px solid black;
+            background-color: lightgray;
+        }
+
+
+        div {
+            float: left;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <canvas id="mycanvas" width="400" height="300"></canvas>
+    </div>
+    <div>
+        <button id="btnPlay">Play</button>
+        <button id="btnPause">Pause</button>
+    </div>
+    <script>
+
+        var canvas = document.getElementById("mycanvas");
+        //get the canvas graphics object or context
+        var ctx = canvas.getContext("2d");
+        var radius = 7; //ball radius
+        var x = canvas.width / 2;
+        var y = canvas.height - 30;
+        var dx = 2;
+        var dy = -2;
+        var paddleHeight = 10;
+        var paddleWidth = 75;
+        var paddleX = (canvas.width - paddleWidth) / 2;
+        var paddleY = canvas.height - paddleHeight;
+        var rightPressed = false;
+        var leftPressed = false;
+        var upPressed = false;
+        var downPressed = false;
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+
+
+        var timerID;
+        document.getElementById("btnPlay").onclick = function () {
+            timerID = setInterval(draw, 20);
+        }
+        document.getElementById("btnPause").onclick = function () {
+            clearInterval(timerID);
+        }
+
+
+        function keyDownHandler(e) {
+            if (e.key == "Right" || e.key == "ArrowRight") {
+                rightPressed = true;
+            }
+            else if (e.key == "Left" || e.key == "ArrowLeft") {
+                leftPressed = true;
+            }
+            else if (e.key == "Up" || e.key == "ArrowUp") {
+                upPressed = true;
+            }
+            else if(e.key == "Down" || e.key == "ArrowDown"){
+                downPressed = true;
+            }
+        }
+
+        function keyUpHandler(e) {
+            if (e.key == "Right" || e.key == "ArrowRight") {
+                rightPressed = false;
+            }
+            else if (e.key == "Left" || e.key == "ArrowLeft") {
+                leftPressed = false;
+            }
+            else if (e.key == "Up" || e.key == "ArrowUp") {
+                upPressed = false;
+            }
+            else if(e.key == "Down" || e.key == "ArrowDown") {
+                downPressed = false;
+            }
+        }
+
+        function Rectangle(x,y,w,h,dx,dy) {
+            this.x = x; //upper left corner x-coordinate
+            this.y = y; //upper left corner y-coordinate
+            this.w = w; //width
+            this.h = h; //height
+            this.dx = dx; //distance (in pixels) to move horizontally
+            this.dy = dy; //distance (in pixels) to move each time vertically
+        }
+
+        
+
+
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawPaddle() {
+            ctx.beginPath();
+            var Paddle = new Rectangle(paddleX, paddleY, paddleWidth, paddleHeight, dx, dy);
+            ctx.fillStyle = "red";
+            //ctx.fill(paddleX, paddleY, paddleWidth, paddleHeight);
+            ctx.fillRect(Paddle.x, Paddle.y, Paddle.w, Paddle.h, Paddle.dx, Paddle.dy);
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBall();
+            drawPaddle();
+           
+            if (x + dx > canvas.width - radius || x + dx < radius) {
+                dx = -dx;
+            }
+            if (y + dy > canvas.height - radius || y + dy < radius) {
+                dy = -dy;
+            }
+            //------------------------
+            if (rightPressed && paddleX < canvas.width - paddleWidth) {
+                paddleX += 7;
+            }
+            else if (leftPressed && paddleX > 0) {
+                paddleX -= 7;
+            }
+
+            if (upPressed && paddleY > 0) {
+                paddleY -= 7;
+            }
+            else if (downPressed && paddleY < canvas.height - paddleHeight) {
+                paddleY += 7;
+            }
+            x += dx;
+            y += dy;
+
+            //ballCollision();
+            collision();
+        }
+
+        function collision() {
+            if (paddleX < x + radius/2 && paddleX + paddleWidth > x + radius/2 && paddleY < y + radius/2 && paddleY + paddleHeight > y + radius/2) {
+                dy = -dy;
+            }
+            if (paddleX < x - radius / 2 && paddleX + paddleWidth > x - radius / 2 && paddleY < y - radius / 2 && paddleY + paddleHeight > y - radius / 2) {
+                dy = -dy;
+            }
+        }
+ 
+    </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+       
+        #displayarea{
+            height: 250px;
+            width: 17%; 
+            background-color: teal;
+            border: solid red 1px;
+            font: Arial;
+            color: white;
+        }
+        #square {
+            height: 75px;
+            width: 75px;
+            background-color: darkmagenta;
+            border: solid red 2px;
+            position: relative;
+        }
+
+
+    </style>
+</head>
+<body onload="onload();">
+    <!--17% is 1/6th or 1/2 of 1/3 of the screen width-->
+    <h1> Assignment 1</h1>
+
+    
+    <p id="displayarea" ></p>
+    <br />
+    <div id="square"></div>
+    <br /><br />
+    <button onclick="numberGenerator();"> Generate 6 random numbers</button>
+    <br /><br /><br />
+    <h2>25 words in a textbox</h2>
+    <input type="text" id="textbox"/>
+    <h3>Find the first and second blank space</h3>
+    <button onclick="displayArray();">Find both white spaces</button>
+    <h3> Get the vowels</h3>
+    <button onclick="getVowels(word);"> get the vowels and count</button>
+    <h3>Add 7 days</h3>
+    <button onclick="sevenDays(7);"> Add 7 days to current date</button>
+    <h3> V div</h3>
+    <button onclick="V();">Move the Div in a V shape</button>
+    <script>
+
+
+
+
+        var word = "different narrow confess fruit shade sniff play enter judge necessary appreciate boiling behavior exultant flung trade sense command frightening unit pack support nation sticks ban";
+        function numberGenerator() {
+            document.getElementById("displayarea").innerHTML = "";
+            for (var i = 0; i < 6; i++) {
+                var result = Math.floor(Math.random() * 2);
+                if (result == 0) {
+                    document.getElementById("displayarea").innerHTML += Math.floor(Math.random() * 101) + " , ";
+                }
+                else {
+                    document.getElementById("displayarea").innerHTML += Math.floor(Math.random() * -100) + " , ";
+                }
+
+            }
+        }
+
+        function words() {
+
+            document.getElementById("textbox").value = word;
+        } 
+        function onload() {
+            words();
+        }
+
+       
+
+ 
+
+        //function whitespace(string) {
+        //    var counter = 0;
+        //    var results = [0, 0];
+
+        //    for (var i = 0; i < string.length; i++) {
+        //        if (counter >= 0 && counter <= 2) {
+        //            counter++;
+        //            if (counter === 0) {
+        //                results[0] = string.indexOf(" ");
+        //            }
+        //            else if (counter === 1) {
+        //                results[1] = string.indexOf(" ");
+        //            }
+        //        }
+        //    }
+        //    alert(results);
+        //}
+
+        function displayArray() {
+
+            alert(whitespace());
+            document.getElementById("displayarea").innerHTML = whitespace();
+        }
+
+        function whitespace(string) {
+            var counter = 0;
+            var string = document.getElementById("textbox").value;
+            var charArray = string.split("");
+            var display = document.getElementById("displayarea");
+            var array = [];
+
+            for (var i = 0; i < charArray.length; i++) {
+
+                if (charArray[i] === " ") {
+                    counter++;
+                    array.push(i);
+
+                    if (counter == 2) {
+                        //display.innerHTML = array;
+                        return array;
+                    }
+                }
+            }
+            
+        }
+
+        function getVowels(str) {
+            var count = 0;
+            var vowels = ['a','e','i','o','u'];
+            //turn the input into a string
+            var string = str.toString()
+            var newString = " ";
+            //loop through
+            for (var i = 0; i <= string.length; i++) {
+
+                //if vowel replace with a white space
+                //for (var j = 0; j < vowels.length; j++) {
+                //    if (string.charAt(i) == vowels[j]) {
+                //        newString += " "; 
+                //        count++;
+                //        continue;
+                //    } else {
+                        
+                //    }
+
+                //}
+                //newString += string.charAt(i);
+                if (vowels.includes(string.charAt(i))) {
+                    newString += " ";
+                    count++;
+                } else {
+                    newString += string.charAt(i);
+                }
+            
+            }
+            document.getElementById("displayarea").innerHTML = newString + "<br />" + count + " vowels";
+            alert(newString);
+
+        }
+
+        function sevenDays(days) {
+            var currentDate = new Date();
+            currentDate.setDate(currentDate.getDate() + days)
+            alert(currentDate);
+            document.getElementById("displayarea").innerHTML = currentDate;
+        }
+
+       
+
+        document.getElementById("displayarea").onclick = greenDisplay;
+        function greenDisplay() {
+            function teal() {
+              document.getElementById("displayarea").style.backgroundColor = "teal";
+            }
+            document.getElementById("displayarea").style.backgroundColor = "green";
+            window.setTimeout(teal, 3000);
+        }
+
+        function V() {
+            document.getElementById("displayarea").innerHTML = "";
+            var timerID;
+
+            var winWidth = window.innerWidth;
+            var winHeight = window.innerHeight;
+            var xpos = 0;
+            var ypos = 0;
+            var yspeed = 5;
+            var xspeed = 6;
+            //set timer to change the left property of the div 
+            timerID = window.setInterval(function () {
+                document.getElementById("square").style.left = xpos + "px";
+                document.getElementById("square").style.top = ypos + "px";
+                xpos += xspeed;
+                ypos += yspeed;
+                document.getElementById("displayarea").innerHTML = "width: " + winWidth + " height " + winHeight;
+                document.getElementById("displayarea").innerHTML += "x: " + xpos + " y: " + ypos;
+
+                if (xpos + 10 > winWidth ) {
+                    clearInterval(timerID);
+                    xpos = 0;
+                    document.getElementById("square").style.left = xpos + "px";
+                }
+                if (ypos + 10 > winHeight - 425) {
+                    yspeed = -5;
+                    document.getElementById("square").style.top = ypos + "px";
+                    
+                }
+                if (ypos == -300 || xpos > winWidth - 100) {
+                    clearInterval(timerID);
+                    yspeed = 0;
+                    xspeed = 0;
+                }
+            }, 20)
+
+
+            
+            
+
+
+
+        }
+    </script>
+</body>
+</html>

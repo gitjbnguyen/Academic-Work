@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        var counter = 1;
+        $(function () {
+          
+            $("#btnReplace").click(function () {
+               
+                //create a new p element 
+                var pElement = document.createElement("p");
+                //create a text node to append to it 
+                var text = document.createTextNode("This is a paragraph: " + counter);
+                counter++;
+                //append text to pElement 
+                pElement.appendChild(text);
+                //get a reference to the element to be replaced 
+                var pElement2 = document.getElementById("p1");
+
+
+                //get a reference to the parent element div1 
+                var parent = document.getElementById("div1");
+
+                //replace pElement2 by pElement1
+                //parent.replaceChild(newChild,oldChild); //syntax
+                parent.replaceChild(pElement, pElement2);
+
+                //replace the last li with a new li that displays Juice instead of soda
+                //create a new li element and its text node
+                var newElementli = document.createElement("li");
+                var text = document.createTextNode("Juice");
+                newElementli.appendChild(text);
+                //get a reference to the li you want to replace
+                var parent = document.getElementById("drinks");
+                var original = document.getElementById("soda");
+                //replace it
+                parent.replaceChild(newElementli, original);
+                //when you are done, turn in this html page as an assignment 
+                //also turn in yesterday html page (create page) to canvas as assignment
+
+
+            });
+
+        });
+    </script>
+    <style>
+        #div1 {
+            width: 40%;
+            height: 300px;
+            border: 2px solid blue;
+            background-color: darkgreen;
+            overflow: scroll;
+        }
+
+        p {
+            background-color: lightgreen;
+            color: darkgreen;
+            font-size: larger;
+            border: 1px solid gold;
+            padding: 5px;
+            margin: 5px;
+        }
+        span, ol {
+            font-size: large;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h4>Replace Child</h4>
+    <p>
+        You can replace an old html element by a newly created element
+
+    </p>
+    <hr/>
+    <button id="btnReplace">replace one time</button><br/><br/>
+
+    <div id="div1">
+        <p id="p1">Paragraph to be replaced</p>
+        <p id="p2">Click on the button to be replaced to top paragraph</p>
+        <hr/>
+        <span>Drinks</span> <br/>
+        <ol id="drinks">
+            <li>Hot Tea</li>
+            <li>Coffee</li>
+            <li id="soda">Soda</li>
+
+        </ol>
+    </div>
+</body>
+</html>

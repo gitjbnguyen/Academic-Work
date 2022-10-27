@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <title></title>
+	<meta charset="utf-8" />
+    <style>
+         /*@import url('https://fonts.googleapis.com/css?family=Slabo+27px');*/
+         @import url('https://fonts.googleapis.com/css?family=Indie+Flower|Slabo+27px|Amatic+SC');
+        body{
+            background-color:#003C7F;
+        }
+        h1{
+           color:white;
+          font-family: 'Indie Flower', cursive;
+           text-align: center;
+           font-size: 50px;
+        }
+        label{
+            color: yellow;
+           font-family: 'Slabo 27px', serif;
+           font-size: 20px;
+        }
+        .btnDown{
+            padding:4px;
+            border-radius: 5px; 
+        }
+        .btnUp{
+            padding:4px;
+            border-radius: 5px; 
+        }
+        #input{
+            width: 10px;
+            text-align: center;
+        }
+        #displayarea {
+            background-color: #B20300;
+            width: 300px;
+            height: 500px;
+            border: 2px solid blue;
+            color: white;
+            font: bold 16px arial,verdana;
+            overflow: scroll;
+           
+        }
+        .innerHTML {
+           text-align:center;
+        }
+        #food{
+            text-align:center;
+            padding: 10px;
+            
+        }
+        #down{
+            margin-top:10px;
+        }
+        #up{
+            margin-top:10px;
+        }
+      p{
+           text-align: center;
+       }
+       #outputarea{
+           width:300px;
+           margin-left:auto;
+           margin-right:auto;
+       }
+       font{
+           text-align:center;
+           color:yellow;
+       }
+       #logo{
+           margin-left: 850px;
+           margin-right: auto;
+           
+       }
+       #slogan{
+          text-align:center;
+          font-family: 'Amatic SC', cursive;
+       }
+       #items{
+           margin-left: 25px;
+       }
+    </style>
+    <script>
+        //buttons
+        //math application
+        //design
+        function multiply() {
+            var v1 = parseFloat(document.getElementById("burger").value) * 4.99;
+            var qtyBurger = parseInt(document.getElementById("burger").value);
+            var v2 = parseFloat(document.getElementById("fries").value) * 0.99;
+            var qtyFries = parseInt(document.getElementById("fries").value);
+            var v3 = parseFloat(document.getElementById("drinks").value) * 1;
+            var qtyDrinks = parseInt(document.getElementById("drinks").value);
+            var v4 = parseFloat(document.getElementById("desserts").value)* 2.50;
+            var qtyDesserts = parseInt(document.getElementById("desserts").value);
+            var product = v1 + v2 + v3 + v4;
+
+            //display them
+            var tax = 0.095;
+            //var total = document.getElementById("txtResult").value = product.toFixed(2);
+            var total = product.toFixed(2);
+            var withTax = total * (1+tax);
+            var display = document.getElementById("displayarea");
+            display.innerHTML = "<br/>"+"<br/>"+"YOUR ORDER:";
+            display.innerHTML += "<br/>" + "<br/>"+"Burger           X   " + qtyBurger + "  price:  $" + v1 + "<br/>" + "<br/>";
+            display.innerHTML += "Fries           X   " + qtyFries + "  price:  $" + v2 + "<br/>" + "<br/>";
+            display.innerHTML += "Drinks           X   " + qtyDrinks + "  price: $" + v3.toFixed(2) + "<br />" + "<br/>";
+            display.innerHTML += "Desserts           X   " + qtyDesserts + "  price:  $" + v4.toFixed(2) + "<br />" + "<br/>";
+            display.innerHTML += "subtotal: $" + total + "<br/>"+ "<br/>";
+            display.innerHTML += "tax: $" + (tax * total).toFixed(2) + "<br /> "+"<br/ >";
+            display.innerHTML += "total: " + "$" + withTax.toFixed(2) + "<br /> " + "<br/ >";
+            display.innerHTML += "HAVE A GREAT DAY!";
+        }
+        function decrement(input) {
+            var decrement = parseInt(document.getElementById(input).value);
+            if (decrement !== 0) {
+                var newvalue = decrement - 1;
+                document.getElementById(input).value = newvalue;
+            }
+        }
+        function increment(userInput) {
+            var increment = parseInt(document.getElementById(userInput).value);
+            var newvalue = increment + 1;
+            document.getElementById(userInput).value = newvalue;
+        }
+    </script>
+</head>
+<body>
+    <div id="logo">
+    <img src="https://cdn.dribbble.com/users/1181413/screenshots/3275736/burgerbible_logo_dribble.jpg" alt="burger logo" style="width:150px;height:150px;">
+    </div>
+    <br />
+    <div id="items">
+    <img src="https://www.redrobin.com/content/dam/web/menu/gourmet-burgers/bacon-cheeseburger-1100.jpg" alt="cheeseburger" style="width:200px; height:200px">
+    <img src="https://cms.splendidtable.org/sites/default/files/styles/w2000/public/french-fries.jpg?itok=FS-YwUYH" alt="french fries" style="width:200px; height:200px;" />
+    <img src="https://s3.r29static.com//bin/entry/23d/0,0,2000,1050/x,80/1789125/image.jpg" alt="cola bottle" style="width:200px; height:200px" />
+    <img src="https://prettysimplesweet.com/wp-content/uploads/2014/09/Tiramisu.jpg"alt="tiramisu cup" style="width:200px;height:200px"/>
+    <img src="https://storage.googleapis.com/zagat-user/SweetAuburnSeafood_Atlanta_shrimpburger_main.jpg" alt="Atlanta Shrimp Burger" style="width:200px;height:200px;"/>
+    <img src="http://divascancook.com/wp-content/uploads/2017/04/easy-bakedsweet-potato-fries-1024x768.jpg" alt="Sweet Potato Fries" style="width:200px;height:200px;"/>
+    <img src="https://www.rachelcooks.com/wp-content/uploads/2017/06/strawberry-basil-milkshake-web-2-of-5.jpg" alt="strawberry milkshake" style="width:200px;height:200px;"/>
+    <img src="https://images-gmi-pmc.edge-generalmills.com/ffafa772-2ee1-4460-a68a-9d0cc373bbe9.jpg" alt="red velvet cookies" style="width:200px;height:200px"/>
+    <img src="https://assets3.thrillist.com/v1/image/2709963/size/gn-gift_guide_variable_c.jpg" alt="double cheeseburger" style="width:200px;height:200px;"/>
+    </div>
+    <h1>4 and a Half Guys Burger</h1>
+    <p id="slogan">
+        <font size="5">
+           <b> WELCOME TO 4 AND A HALF GUYS BURGERS! <br />
+            WE SERVE BURGERS, FRIES, DESSERTS, AND DRINKS AT PRICES THAT CAN'T BE BEAT!</b>
+            <br /><br /><br />
+            Your order starts here:
+        </font>
+        <br /><br /><br /><br />
+    </p>
+    
+    <div id="food">
+        <label>burger $4.99:</label>
+        <button class="btnDown" id="down" onclick="decrement('burger')">-</button>
+        <input type="text" id="burger" size="1" value="0" readonly>
+        <button class="btnUp" id="up" onclick="increment('burger')">+</button>
+        <br />
+
+        <label>fries $0.99:</label>
+        <button class="btnDown" id="down" onclick="decrement('fries')">-</button>
+        <input type="text" id="fries" size="1" value="0" readonly>
+        <button class="btnUp" id="up" onclick="increment('fries')">+</button>
+        <br />
+
+        <label>drinks $1.00:</label>
+        <button class="btnDown" id="down" onclick="decrement('drinks')">-</button>
+        <input type="text" id="drinks" size="1" value="0" readonly>
+        <button class="btnUp" id="up" onclick="increment('drinks')">+</button>
+        <br />
+
+        <label>desserts $2.50:</label>
+        <button class="btnDown" id="down" onclick="decrement('desserts')">-</button>
+        <input type="text" id="desserts" size="1" value="0" readonly>
+        <button class="btnUp" id="up" onclick="increment('desserts')">+</button>
+        <br />
+
+
+        <br /> <button onclick="multiply();" id="receipt">Receipt</button><br /> <br />
+        <button onclick="document.getElementById('displayarea').innerHTML = '';">Clear</button>
+    </div>
+        <!--<br /><label>Subtotal: <input type="text" id="txtResult" size="7"> </label> <br />-->
+        <div id="outputarea"><p id="displayarea"></p></div>
+    
+</body>
+</html>
