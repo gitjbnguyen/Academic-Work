@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<style>
+    input[type=number] {
+        width: 60px;
+    }
+
+    input[type=text] {
+        width: 60px;
+    }
+
+    li {
+        margin: 20px;
+    }
+
+    select {
+        margin-left: 75px;
+    }
+</style>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>AngularJS Directives Assignment</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <p>Please select your preferred grocery store: </p>
+    <!--<div ng-app="directivesApp" ng-controller="StoresController">
+        <select ng-model="selectedStore" ng-options="x for x in stores"></select>
+
+    </div>-->
+
+    <!--<select ng-init="">
+        <option value="Safeway">Safeway</option>
+        <option value="Albertsons">Albertsons</option>
+        <option value="Fred Meyers">Fred Meyers</option>
+        <option value="QFC">QFC</option>
+        <option value="Saars">Saars</option>
+        <option value="Whole Foods">Whole Foods</option>
+    </select>-->
+    <div ng-app="directivesApp" ng-controller="productController">
+                <select ng-model="selectedStore" ng-options="x for x in stores"></select>
+        <ol>
+            <li ng-repeat="x in products">
+                {{x.category + " - "  + x.name + " - " + x.price + " - "}}
+                <input type="text" ng-model="x.qty" />
+                $<span>{{x.qty * x.price | number : 2}}</span>
+            </li>
+
+        </ol>
+
+    </div>
+        <!--<script>
+        var app = angular.module("directivesApp", []);
+        app.controller("StoresController", function ($scope) {
+            $scope.stores = ["Safeway", "Albertsons", "Fred Meyers", "QFC", "Saars", "Whole Foods"];
+        });
+    </script>-->
+    <script src="productController.js"></script>
+</body>
+</html>
