@@ -1,0 +1,11 @@
+#kl_wrapper_3.kl_flat_sections #kl_banner {
+    background: #000000;
+}
+#kl_wrapper_3.kl_flat_sections #kl_banner h2 {
+    border-color: #990000;
+    border-top-width: 1px;
+}
+#kl_wrapper_3.kl_flat_sections #kl_banner #kl_banner_left {
+    background-color: #990000;
+    color: #fff;
+}
